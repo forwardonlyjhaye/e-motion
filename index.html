@@ -2,24 +2,447 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home · E-Motion Chat</title>
-<meta name="description" content="E-Motion Chat: find people nearby who feel the same, and talk it through.">
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>E-Motion Chat – Find someone who gets it</title>
+<meta name="description" content="Share what's on your mind and talk it through with kind, anonymous people nearby who feel the same. Free on iPhone and Android.">
+<meta name="theme-color" content="#C4F23C">
+<meta property="og:title" content="E-Motion Chat – Find someone who gets it">
+<meta property="og:description" content="Share what's on your mind. See who nearby feels the same, and talk it through, kindly and anonymously.">
+<meta property="og:image" content="https://forwardonlyjhaye.github.io/e-motion/assets/og.jpg">
+<meta property="og:url" content="https://forwardonlyjhaye.github.io/e-motion/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://forwardonlyjhaye.github.io/e-motion/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--lime:#C4F23C;--lime-soft:#E8F7B8;--night:#0E3B24;--ink:#111311;--ink2:#283022;--stone:#5C6157;--paper:#F6F7F2;--card:#fff;--line:#E3E6DC;
+  --font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:500 17px/1.55 var(--font);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:800;letter-spacing:-.035em;line-height:1.02;margin:0;text-wrap:balance}
+p{margin:0}
+
+/* top */
+.promo{background:var(--night);color:var(--paper);text-align:center;font:600 14px/1.3 var(--font);padding:10px 16px}
+.promo b{color:var(--lime)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:24px;letter-spacing:-.03em;color:var(--night)}
+.brand .mark{width:30px;height:30px;flex:none;overflow:visible}
+.brand .mark path{fill:none;stroke:var(--night);stroke-width:12;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:100;stroke-dashoffset:0}
+.brand{gap:6px}
+.brand .name{display:inline-block;overflow:hidden;padding:4px 2px}
+.brand .name span{display:inline-block}
+nav{display:none;gap:28px;font-weight:600;font-size:15px}
+nav a{text-decoration:none;color:var(--ink2)}nav a:hover{color:var(--night)}
+@media (min-width:860px){nav{display:flex}.brand{font-size:30px}.brand .mark{width:36px;height:36px}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 20px;border-radius:16px;text-decoration:none;font-weight:700;font-size:15px;line-height:1.1}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:#000}
+.btn-ghost{background:rgba(255,255,255,.6);color:var(--ink);border:1.5px solid var(--ink)}
+.btn small{display:block;font-weight:600;font-size:11px;opacity:.75;letter-spacing:.02em}
+.btn svg{width:24px;height:24px;flex:none}
+.stores{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn[aria-disabled=true]{opacity:.55;cursor:default}
+
+/* hero */
+.hero{background:var(--lime);border-radius:0 0 40px 40px;overflow:hidden}
+.hero-inner{text-align:center;padding:28px 0 0}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:99px;background:rgba(255,255,255,.7);font-weight:700;font-size:14px;color:var(--night)}
+.tag i{width:9px;height:9px;border-radius:50%;background:var(--night)}
+.hero h1{font-size:clamp(44px,10vw,88px);margin:18px auto 0;max-width:12ch;color:var(--ink)}
+.hero .sub{max-width:36ch;margin:18px auto 26px;color:var(--ink2);font-size:19px}
+.hero .note{margin-top:12px;font-size:14px;color:var(--ink2)}
+.stage{position:relative;height:clamp(420px,112vw,640px);margin:36px auto 0;max-width:900px}
+.phone{position:absolute;left:50%;width:var(--w);border-radius:calc(var(--w)*.13);background:var(--night);padding:calc(var(--w)*.025);box-shadow:0 30px 60px -20px rgba(14,59,36,.55)}
+.phone img{border-radius:calc(var(--w)*.11)}
+.phone.c{--w:clamp(210px,48vw,300px);top:0;transform:translateX(-50%);z-index:3}
+.phone.l,.phone.r{--w:clamp(170px,38vw,250px);top:13%;z-index:1}
+.phone.l{transform:translateX(-118%) rotate(-7deg)}
+.phone.r{transform:translateX(18%) rotate(7deg)}
+
+/* sections */
+section{padding:84px 0}
+.kicker{display:inline-block;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--night);background:var(--lime-soft);padding:6px 12px;border-radius:99px}
+.head{text-align:center;max-width:720px;margin:0 auto 44px}
+.head h2{font-size:clamp(34px,6vw,56px);margin-top:14px}
+.head p{margin-top:14px;color:var(--stone);font-size:18px}
+
+.steps{display:grid;gap:20px;grid-template-columns:1fr}
+@media (min-width:860px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.step{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:22px 22px 0;overflow:hidden;display:flex;flex-direction:column}
+.step .n{width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--night);display:grid;place-items:center;font-weight:800}
+.step h3{font-size:26px;margin-top:14px}
+.step p{margin-top:8px;color:var(--stone)}
+.step .shot{margin:22px auto 0;width:78%;border-radius:26px 26px 0 0;border:6px solid var(--night);border-bottom:0;overflow:hidden;max-height:340px}
+
+.split{display:grid;gap:40px;align-items:center;grid-template-columns:1fr}
+@media (min-width:860px){.split{grid-template-columns:1fr 1fr}.split.flip .text{order:2}}
+.split .text h2{font-size:clamp(32px,5vw,50px);margin-top:14px}
+.split .text p{margin-top:14px;color:var(--stone);font-size:18px}
+.split .visual{display:flex;justify-content:center}
+.split .visual .frame{width:min(320px,80%);border-radius:40px;border:9px solid var(--night);overflow:hidden;box-shadow:0 30px 60px -24px rgba(14,59,36,.5)}
+ul.ticks{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px}
+ul.ticks li{display:flex;gap:10px;align-items:flex-start}
+ul.ticks li::before{content:"";flex:none;width:22px;height:22px;margin-top:2px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E3B24' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4L18 8'/%3E%3C/svg%3E") center/14px no-repeat}
+
+.topics{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:820px;margin:0 auto}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;background:var(--card);border:1.5px solid var(--line);font-weight:700;font-size:15px}
+.chip i{width:11px;height:11px;border-radius:50%}
+
+.feat{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:640px){.feat{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:980px){.feat{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.feat div{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px}
+.feat h3{font-size:20px;letter-spacing:-.02em}
+.feat p{margin-top:6px;color:var(--stone);font-size:16px}
+.feat .ic{width:44px;height:44px;border-radius:14px;background:var(--lime-soft);display:grid;place-items:center;margin-bottom:14px}
+.feat .ic svg{width:22px;height:22px;stroke:var(--night)}
+
+.safety{background:var(--ink);color:var(--paper);border-radius:40px}
+.safety .kicker{background:var(--lime);color:var(--night)}
+.safety .head p{color:#C9CCC1}
+.safety .feat div{background:#1C1F1B;border-color:#2A2E26}
+.safety .feat p{color:#C9CCC1}
+.safety .feat .ic{background:#2C3814}
+.safety .feat .ic svg{stroke:var(--lime)}
+.crisis{margin:28px auto 0;max-width:820px;background:var(--lime);color:var(--ink);border-radius:24px;padding:20px 22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.crisis p{max-width:52ch;font-weight:600}
+.crisis a.btn{min-height:48px}
+
+.plans{display:grid;gap:16px;grid-template-columns:1fr;max-width:860px;margin:0 auto}
+@media (min-width:760px){.plans{grid-template-columns:1fr 1fr}}
+.plan{background:var(--card);border:1.5px solid var(--line);border-radius:28px;padding:26px}
+.plan.plus{border:2px solid var(--night);background:linear-gradient(180deg,var(--lime-soft),#fff 60%)}
+.plan h3{font-size:28px}
+.plan .price{margin-top:6px;font-weight:700;color:var(--stone)}
+.plan .price b{color:var(--ink);font-size:22px}
+.badge{display:inline-block;margin-left:8px;vertical-align:middle;font-size:12px;font-weight:800;background:var(--lime);color:var(--night);padding:4px 10px;border-radius:99px;letter-spacing:0}
+
+.faq{max-width:780px;margin:0 auto;display:grid;gap:10px}
+details{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 22px}
+summary{cursor:pointer;font-weight:800;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:26px;line-height:1;color:var(--night);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin-top:10px;color:var(--stone)}
+
+.end{background:var(--lime);border-radius:40px;text-align:center;padding:64px 20px}
+.end h2{font-size:clamp(36px,7vw,64px);max-width:14ch;margin:0 auto}
+.end p{margin:16px auto 26px;max-width:40ch;color:var(--ink2);font-size:18px}
+
+footer{padding:40px 0 60px;color:var(--stone);font-size:15px}
+footer .row{display:flex;flex-wrap:wrap;gap:14px 26px;justify-content:space-between;align-items:center}
+footer nav{display:flex;flex-wrap:wrap;gap:10px 20px}
+footer a{text-decoration:none;font-weight:600}footer a:hover{color:var(--ink)}
+
+
+/* floating Motion bubbles */
+.bubble{position:absolute;z-index:4;display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border-radius:99px;background:#fff;font-weight:700;font-size:clamp(12px,3.2vw,15px);white-space:nowrap;box-shadow:0 12px 26px -12px rgba(14,59,36,.45)}
+.bubble i{width:10px;height:10px;border-radius:50%}
+.bubble.b1{left:4%;top:4%}
+.bubble.b2{right:3%;top:9%}
+.bubble.b3{left:1%;top:58%}
+.bubble.b4{right:2%;top:52%}
+@media (min-width:760px){.bubble.b1{left:12%}.bubble.b2{right:12%}.bubble.b3{left:8%}.bubble.b4{right:8%}}
+
+/* buttons */
+.btn{transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.btn:not([aria-disabled=true]):hover{transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(14,59,36,.6)}
+.btn:not([aria-disabled=true]):active{transform:translateY(0) scale(.97)}
+.chip{transition:transform .18s ease}
+.chip:hover{transform:translateY(-3px) rotate(-2deg)}
+.step,.feat div,.plan{transition:transform .25s ease,box-shadow .25s ease}
+.step:hover,.feat div:hover,.plan:hover{transform:translateY(-4px);box-shadow:0 18px 34px -22px rgba(14,59,36,.45)}
+
+@media (prefers-reduced-motion:no-preference){
+  /* logo: the e writes itself, then "Motion Chat" slides out from behind it */
+  .brand .mark path{stroke-dashoffset:100;animation:write .9s cubic-bezier(.6,0,.3,1) .15s forwards}
+  .brand .name span{transform:translateX(-110%);opacity:0;animation:flow .7s cubic-bezier(.2,.8,.2,1.05) .85s forwards}
+  @keyframes write{to{stroke-dashoffset:0}}
+  @keyframes flow{to{transform:none;opacity:1}}
+
+  /* hero text and buttons arrive in turn */
+  .hero-inner>.tag,.hero-inner>h1,.hero-inner>.sub,.hero-inner>.stores,.hero-inner>.note{opacity:0;animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards}
+  .hero-inner>.tag{animation-delay:.2s}.hero-inner>h1{animation-delay:.3s}.hero-inner>.sub{animation-delay:.45s}
+  .hero-inner>.stores{animation-delay:.6s}.hero-inner>.note{animation-delay:.7s}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+  /* main button: a soft lime pulse every few seconds */
+  .hero .stores .btn-dark{animation:pulse 3.2s ease-in-out 2s infinite}
+  @keyframes pulse{0%,70%,100%{box-shadow:0 0 0 0 rgba(14,59,36,0)}80%{box-shadow:0 0 0 10px rgba(14,59,36,.18)}}
+
+  /* phones rise in, then float */
+  .phone{animation:phoneIn .9s cubic-bezier(.2,.8,.2,1) both,float 6s ease-in-out infinite}
+  .phone.c{--t:translateX(-50%);animation-delay:.55s,1.45s}
+  .phone.l{--t:translateX(-118%) rotate(-7deg);animation-delay:.75s,2.1s}
+  .phone.r{--t:translateX(18%) rotate(7deg);animation-delay:.85s,1.8s}
+  @keyframes phoneIn{from{opacity:0;transform:var(--t) translateY(80px)}to{opacity:1;transform:var(--t)}}
+  @keyframes float{0%,100%{transform:var(--t) translateY(0)}50%{transform:var(--t) translateY(-12px)}}
+
+  /* bubbles pop in, then drift */
+  .bubble{opacity:0;animation:pop .55s cubic-bezier(.3,1.5,.5,1) forwards,drift 5s ease-in-out infinite}
+  .bubble.b1{animation-delay:1.1s,1.65s}.bubble.b2{animation-delay:1.3s,2.2s}.bubble.b3{animation-delay:1.5s,1.9s}.bubble.b4{animation-delay:1.7s,2.6s}
+  @keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+  @keyframes drift{0%,100%{transform:translate(0,0)}33%{transform:translate(4px,-8px)}66%{transform:translate(-4px,-3px)}}
+
+  /* topic bubbles pop in one by one when scrolled to */
+  .topics .chip{opacity:0;transform:scale(.6)}
+  .topics.in .chip{animation:pop .5s cubic-bezier(.3,1.5,.5,1) forwards}
+  .topics.in .chip:hover{transform:translateY(-3px) rotate(-2deg)}
+
+  /* screenshots in cards and frames float gently */
+  .step .shot,.split .visual .frame{animation:float2 7s ease-in-out infinite}
+  .step:nth-child(2) .shot{animation-delay:-2.3s}.step:nth-child(3) .shot{animation-delay:-4.6s}
+  @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+}
+@media (prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
-<header><div class="wrap">
-<div><a href="./"><svg class="logo" viewBox="0 0 26 16" aria-hidden="true"><path d="M2 8 Q6.5 1 11 8 T20 8" fill="none" stroke="#111311" stroke-width="2.6" stroke-linecap="round"/><circle cx="23.5" cy="8" r="2.2" fill="#111311"/></svg>e-motion</a>
-<nav><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="guidelines.html">Community Guidelines</a><a href="support.html">Support</a></nav></div>
-</div></header>
-<main><div class="wrap">
 
-<h1>Find someone who gets it.</h1>
-<p>E-Motion Chat lets you share what's on your mind (a <em>Motion</em>), see who nearby feels the same, and talk it through with kind, anonymous people.</p>
-<div class="crisis"><strong>If you're in crisis or thinking about harming yourself:</strong> E-Motion Chat is peer support, not an emergency service. In the US, call or text <strong>988</strong>. Elsewhere, find a free, confidential line at <a href="https://findahelpline.com">findahelpline.com</a>. If you're in immediate danger, call your local emergency number.</div>
-<div class="card"><p><a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a> · <a href="guidelines.html">Community Guidelines</a> · <a href="support.html">Support</a></p></div>
+<div class="promo">Now on Google Play · <b>iPhone coming very soon</b></div>
 
-</div></main>
-<footer><div class="wrap">© 2026 ForwardOnly LLC · <a href="mailto:emotionchatsupport@forwardonlyllc.com">emotionchatsupport@forwardonlyllc.com</a></div></footer>
+<div class="hero">
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./" aria-label="E-Motion Chat home">
+        <svg class="mark" viewBox="22 22 56 56" aria-hidden="true"><path pathLength="100" d="M28 50 H72 A22 22 0 1 0 68 62.6"/></svg>
+        <span class="name"><span>Motion Chat</span></span>
+      </a>
+      <nav><a href="#how">How it works</a><a href="#safety">Safety</a><a href="#plus">Plus</a><a href="#faq">FAQ</a></nav>
+      <a class="btn btn-dark" href="#download" style="min-height:44px;padding:0 16px">Get the app</a>
+    </header>
+
+    <div class="hero-inner">
+      <span class="tag"><i></i>Peer support, nearby</span>
+      <h1>Find someone who gets it.</h1>
+      <p class="sub">Share what's on your mind, see who nearby feels the same, and talk it through with kind, anonymous people.</p>
+      <div class="stores" id="download">
+        <a class="btn btn-dark" href="https://play.google.com/store/apps/details?id=com.forwardonlyjhaye.emotionchat">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#C4F23C" d="M4 2.6c-.3.3-.5.8-.5 1.3v16.2c0 .5.2 1 .5 1.3l9.3-9.4z"/><path fill="#fff" d="M16.4 15.1l-3.1-3.1L4 21.4c.4.4 1 .4 1.7.1z"/><path fill="#6FDDBB" d="M16.4 8.9L5.7 2.5C5 2.1 4.4 2.2 4 2.6l9.3 9.4z"/><path fill="#E8F7B8" d="M20.2 11.1l-3.8-2.2-3.1 3.1 3.1 3.1 3.8-2.2c.9-.5.9-1.3 0-1.8z"/></svg>
+          <span><small>GET IT ON</small>Google Play</span>
+        </a>
+        <!-- iPhone: swap to href="https://apps.apple.com/app/id6818756614" and remove aria-disabled once Apple approves. -->
+        <a class="btn btn-ghost" aria-disabled="true" title="Coming very soon to the App Store">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9s-2-.9-3.3-.9c-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6s1.8-.8 3.3-.8 2 .8 3.3.8c1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.8-1.1-2.8-4.1zM14 5.2c.7-.8 1.2-2 1-3.2-1 0-2.3.7-3 1.5-.7.7-1.2 1.9-1.1 3.1 1.2.1 2.4-.6 3.1-1.4z"/></svg>
+          <span><small>COMING SOON ON THE</small>App Store</span>
+        </a>
+      </div>
+      <p class="note">Free to use · 18+ · Anonymous by default</p>
+
+      <div class="stage" aria-hidden="true">
+        <div class="phone l"><img src="assets/02-brings.jpg" alt=""></div>
+        <div class="phone c"><img src="assets/03-map.jpg" alt=""></div>
+        <div class="phone r"><img src="assets/05-match.jpg" alt=""></div>
+        <span class="bubble b1"><i style="background:#B8A6FF"></i>anxious about work</span>
+        <span class="bubble b2"><i style="background:#FF8F80"></i>fresh breakup</span>
+        <span class="bubble b3"><i style="background:#6FDDBB"></i>new in town</span>
+        <span class="bubble b4"><i style="background:#FFE45C"></i>good news!</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+<section id="how">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">How it works</span>
+      <h2>Talk to someone in three easy steps</h2>
+      <p>No followers, no feeds, no pressure. Just real people nearby who are carrying the same thing you are.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="n">1</span><h3>Share a Motion</h3><p>Say what's on your mind: anxiety, a breakup, grief, burnout, or just wanting a real conversation.</p><div class="shot"><img src="assets/04-share-motion.jpg" alt="Choosing topics for your Motion" loading="lazy"></div></div>
+      <div class="step reveal"><span class="n">2</span><h3>See who feels the same</h3><p>Your Motion shows on a map near you. Same topic? It's a Motion match.</p><div class="shot"><img src="assets/03-map.jpg" alt="The map with people nearby" loading="lazy"></div></div>
+      <div class="step reveal"><span class="n">3</span><h3>Talk it through</h3><p>Start gently with a suggested opener. Chat, send a voice note, or call when you're ready.</p><div class="shot"><img src="assets/06-chat.jpg" alt="A chat between two people" loading="lazy"></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Whatever you're carrying</span>
+      <h2>Someone nearby is going through it too</h2>
+    </div>
+    <div class="topics reveal">
+      <span class="chip"><i style="background:#B8A6FF"></i>Anxiety</span>
+      <span class="chip"><i style="background:#FF8F80"></i>Breakup</span>
+      <span class="chip"><i style="background:#8CC4FF"></i>Grief &amp; loss</span>
+      <span class="chip"><i style="background:#FFC24D"></i>Burnout</span>
+      <span class="chip"><i style="background:#6FDDBB"></i>Loneliness</span>
+      <span class="chip"><i style="background:#FFB088"></i>Family</span>
+      <span class="chip"><i style="background:#F5A3D0"></i>Self-worth</span>
+      <span class="chip"><i style="background:#D9CF5E"></i>Money stress</span>
+      <span class="chip"><i style="background:#9ED97A"></i>New city</span>
+      <span class="chip"><i style="background:#C4F23C"></i>Just want to talk</span>
+      <span class="chip"><i style="background:#FFE45C"></i>Good news</span>
+      <span class="chip"><i style="background:#E0A6FF"></i>Grateful</span>
+      <span class="chip"><i style="background:#7EE0D0"></i>Feeling hopeful</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="split">
+      <div class="text reveal">
+        <span class="kicker">Motion match</span>
+        <h2>Start gently. No pressure.</h2>
+        <p>When you and someone nearby share the same Motion, we tell you both, and suggest a kind way to open the conversation.</p>
+        <ul class="ticks">
+          <li>Anonymous by default: just a nickname and initials</li>
+          <li>Gentle openers so you never stare at a blank chat</li>
+          <li>Pause or end any chat, anytime</li>
+        </ul>
+      </div>
+      <div class="visual reveal"><div class="frame"><img src="assets/05-match.jpg" alt="It's a Motion match screen" loading="lazy"></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="split flip">
+      <div class="text reveal">
+        <span class="kicker">Be there for someone</span>
+        <h2>Listening counts too</h2>
+        <p>Not ready to talk? Be the kind ear someone needs tonight. Helping a neighbor keeps your own Motion live longer, and it feels good.</p>
+        <ul class="ticks">
+          <li>Choose to talk, listen, or both</li>
+          <li>Kindness ratings keep the community warm</li>
+          <li>A private mood journal to see what helps</li>
+        </ul>
+      </div>
+      <div class="visual reveal"><div class="frame"><img src="assets/07-lots-of-motion.jpg" alt="You've got lots of Motion celebration" loading="lazy"></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Everything you need</span>
+      <h2>Made for real conversations</h2>
+    </div>
+    <div class="feat">
+      <div class="reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg></span><h3>A map of feelings</h3><p>See Motions near you, filtered by topic. Your spot is rounded to about half a mile, never exact.</p></div>
+      <div class="reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></span><h3>Chat, voice and video</h3><p>Text, photos, hold-to-record voice notes, and calls when you're ready.</p></div>
+      <div class="reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 14.2c3.2-.4 6.5 1.6 6.5 5.8"/></svg></span><h3>Circles</h3><p>Small group chats around a shared topic, for when one-on-one feels like a lot.</p></div>
+      <div class="reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M6 15l4-4 3 3 5-6"/></svg></span><h3>Mood journal</h3><p>Quick private check-ins that stay on your phone. Notice what helps over time.</p></div>
+      <div class="reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span><h3>Your language</h3><p>Pick the languages you chat in, and see who speaks them before you say hi.</p></div>
+      <div class="reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></span><h3>Meet up, safely</h3><p>With Plus, plan a coffee or walk in a public spot with someone you've been talking to.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="safety" style="padding:0">
+  <div class="wrap">
+    <div class="safety" style="padding:72px 22px">
+      <div class="head reveal">
+        <span class="kicker">Safety first</span>
+        <h2>Kind by design</h2>
+        <p>E-Motion Chat is a place to support each other. Everyone agrees to our rules before they join, and we act fast when someone breaks them.</p>
+      </div>
+      <div class="feat" style="max-width:1000px;margin:0 auto">
+        <div class="reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span><h3>Adults only</h3><p>Every account confirms they're 18 or older and agrees to our zero-tolerance Terms.</p></div>
+        <div class="reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span><h3>Report, block, hide</h3><p>Hide any message, report or block anyone in a tap. Blocking removes them right away.</p></div>
+        <div class="reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><h3>Private by default</h3><p>Nicknames, initials and an approximate area. Photos only when you choose to reveal.</p></div>
+      </div>
+      <div class="crisis reveal">
+        <p>If you're in crisis or thinking about harming yourself, you don't have to carry it alone. In the US, call or text 988. Elsewhere, visit <a href="https://findahelpline.com">findahelpline.com</a>.</p>
+        <a class="btn btn-dark" href="tel:988">Call or text 988</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plus">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Free, with more if you want it</span>
+      <h2>Talking is always free</h2>
+      <p>Chatting, your Motion, safety tools and crisis support never cost a thing. Plus adds more ways to show up for each other.</p>
+    </div>
+    <div class="plans">
+      <div class="plan reveal">
+        <h3>Free</h3>
+        <p class="price"><b>$0</b> forever</p>
+        <ul class="ticks">
+          <li>Share Motions and see people within 5 miles</li>
+          <li>Unlimited chats, voice notes and photos</li>
+          <li>Calls up to 15 minutes</li>
+          <li>Circles, mood journal and all safety tools</li>
+        </ul>
+      </div>
+      <div class="plan plus reveal">
+        <h3>E-Motion Plus <span class="badge">7 days free</span></h3>
+        <p class="price"><b>$59.99</b>/year · or $9.99/month</p>
+        <ul class="ticks">
+          <li>Meetups in safe public spots</li>
+          <li>Priority listening: more people see your Motion, sooner</li>
+          <li>Unlimited calls and a 50-mile map</li>
+          <li>Mood insights, longer Motions and a Plus star</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal"><span class="kicker">Questions</span><h2>Good to know</h2></div>
+    <div class="faq">
+      <details class="reveal"><summary>Is E-Motion Chat free?</summary><p>Yes. Sharing a Motion, chatting, safety tools and crisis support are free. E-Motion Plus is optional and adds meetups, unlimited calls, a wider map and more, with a 7-day free trial on the yearly plan.</p></details>
+      <details class="reveal"><summary>Is it anonymous?</summary><p>Yes, by default. People see a nickname and your initials, never your real name. Your photo only shows if you choose to reveal it.</p></details>
+      <details class="reveal"><summary>Can people see where I live?</summary><p>No. Your location is rounded to about half a mile on your phone and again on our servers, so nobody sees your exact spot.</p></details>
+      <details class="reveal"><summary>Is this therapy?</summary><p>No. E-Motion Chat is peer support: kind people who've been through similar things. For ongoing support, a licensed therapist can help. If you're in crisis, call or text 988 in the US.</p></details>
+      <details class="reveal"><summary>Who can join?</summary><p>Adults 18 and older who agree to our Terms and Community Guidelines. There's zero tolerance for abuse, and accounts that break the rules are removed.</p></details>
+      <details class="reveal"><summary>How do I delete my account?</summary><p>In the app, go to Me › Account › Delete account. You can also <a href="delete-account.html">request deletion here</a>.</p></details>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="end reveal">
+      <h2>Someone nearby feels it too.</h2>
+      <p>Share what's on your mind and find someone who gets it. Free on Android, coming very soon to iPhone.</p>
+      <div class="stores">
+        <a class="btn btn-dark" href="https://play.google.com/store/apps/details?id=com.forwardonlyjhaye.emotionchat"><span><small>GET IT ON</small>Google Play</span></a>
+        <a class="btn btn-ghost" aria-disabled="true"><span><small>COMING SOON ON THE</small>App Store</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <div>© 2026 ForwardOnly LLC · <a href="mailto:emotionchatsupport@forwardonlyllc.com">emotionchatsupport@forwardonlyllc.com</a></div>
+    <nav aria-label="Legal"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="guidelines.html">Community Guidelines</a><a href="child-safety.html">Child Safety</a><a href="delete-account.html">Delete account</a><a href="support.html">Support</a></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+  document.querySelectorAll('.topics .chip').forEach(function(c,i){c.style.animationDelay=(i*0.06)+'s'});
+})();
+</script>
 </body>
 </html>

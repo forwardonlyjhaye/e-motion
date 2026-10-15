@@ -19,4 +19,4 @@ p,li{color:var(--ink)}
 .crisis a{color:#C4F23C}
 a{color:inherit}
 footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:14px;color:var(--stone)}
-svg.logo{width:40px;height:25px}
+svg.logo{width:24px;height:24px;margin-right:-6px}
