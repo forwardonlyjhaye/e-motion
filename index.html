@@ -90,6 +90,10 @@ section{padding:84px 0}
 .split .text h2{font-size:clamp(32px,5vw,50px);margin-top:14px}
 .split .text p{margin-top:14px;color:var(--stone);font-size:18px}
 .split .visual{display:flex;justify-content:center}
+.ad-frame{position:relative;width:min(340px,86%);aspect-ratio:9/16;border-radius:34px;overflow:hidden;background:var(--night);box-shadow:0 30px 60px -24px rgba(14,59,36,.55)}
+.ad-frame video{display:block;width:100%;height:100%;object-fit:cover}
+.ad-frame .sound{position:absolute;right:14px;bottom:14px;min-height:44px;padding:0 16px;border:0;border-radius:99px;background:rgba(17,19,17,.78);color:#fff;font:700 14px/1 var(--font);cursor:pointer}
+.ad-frame .sound[aria-pressed="true"]{background:var(--lime);color:var(--night)}
 .split .visual .frame{width:min(320px,80%);border-radius:40px;border:9px solid var(--night);overflow:hidden;box-shadow:0 30px 60px -24px rgba(14,59,36,.5)}
 ul.ticks{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px}
 ul.ticks li{display:flex;gap:10px;align-items:flex-start}
@@ -257,6 +261,26 @@ footer a{text-decoration:none;font-weight:600}footer a:hover{color:var(--ink)}
 </div>
 
 <main>
+<section id="watch" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="split">
+      <div class="text reveal">
+        <span class="kicker">See it in action</span>
+        <h2>From 2am thoughts to a kind chat</h2>
+        <p>Share what's on your mind, see who nearby feels the same, and talk it through. Nothing starts until you both say yes.</p>
+      </div>
+      <div class="visual reveal">
+        <div class="ad-frame">
+          <video id="adVideo" autoplay muted loop playsinline preload="metadata" poster="assets/ad-poster.jpg" aria-label="A 16-second video showing E-Motion Chat: share a Motion, see who nearby feels the same, accept a chat request, and talk it through">
+            <source src="assets/ad.mp4" type="video/mp4">
+          </video>
+          <button type="button" class="sound" id="adSound" aria-pressed="false">Sound on</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="how">
   <div class="wrap">
     <div class="head reveal">
@@ -444,6 +468,17 @@ footer a{text-decoration:none;font-weight:600}footer a:hover{color:var(--ink)}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
   els.forEach(function(e){io.observe(e)});
   document.querySelectorAll('.topics .chip').forEach(function(c,i){c.style.animationDelay=(i*0.06)+'s'});
+})();
+(function(){
+  var v=document.getElementById('adVideo'), b=document.getElementById('adSound');
+  if(!v||!b) return;
+  // People who ask for less motion get a still frame they can start themselves.
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();v.controls=true;}
+  b.addEventListener('click',function(){
+    var on=v.muted; v.muted=!on;
+    if(on){v.currentTime=0;v.play();}
+    b.setAttribute('aria-pressed',on?'true':'false'); b.textContent=on?'Sound off':'Sound on';
+  });
 })();
 </script>
 </body>
